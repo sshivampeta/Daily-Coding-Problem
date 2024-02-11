@@ -110,6 +110,49 @@ A collection of daily coding problem solutions in Python, covering various algor
 
 ---
 
+### 5. **Partition Array** (`array_of_number.py`)
+**Problem:** Split an array into k partitions such that the maximum sum of any partition is minimized.
+
+**Example:** `[5, 1, 2, 7, 3, 4]` with k=3 returns `8`, with partitions `[5, 1, 2]`, `[7]`, `[3, 4]`
+
+**Three Solutions Provided:**
+
+#### 1. Binary Search + Greedy ⭐ (Optimal)
+- `partition_array_binary_search(N, k)` 
+- **Time:** O(n × log(sum(N)))
+- **Space:** O(1)
+- Search for minimum possible maximum sum
+- Greedy validation for each candidate
+
+#### 2. Dynamic Programming
+- `partition_array_dp(N, k)`
+- **Time:** O(n² × k)
+- **Space:** O(n × k)
+- `dp[i][j]` = min max sum for first i elements in j partitions
+- Considers all possible partition boundaries
+
+#### 3. Greedy with Backtracking
+- `partition_array_greedy(N, k)`
+- **Time:** O(n × log(sum(N)))
+- **Space:** O(k)
+- Similar to binary search but with detailed partition tracking
+- Visualizes final partition result
+
+**Key Insights:**
+- Answer is bounded: [max(N), sum(N)]
+- Binary search reduces problem to validation
+- Greedy validation: process left-to-right, fill partitions greedily
+- Edge cases: k=1, k>=n
+
+**Test Cases Include:**
+- Given example and variations
+- Single element array
+- Single partition (k=1)
+- Each element in own partition (k>=n)
+- Duplicate values
+
+---
+
 ## 🚀 Usage
 
 ### Running Individual Solutions
@@ -126,6 +169,9 @@ python Problem01.py
 
 # Run product array examples
 python Problem02.py
+
+# Run partition array examples
+python array_of_number.py
 ```
 
 ### Example Usage in Code
@@ -166,6 +212,9 @@ print(has_pair_one_pass(nums, k))  # True
 | Two-Sum | Brute Force | O(n²) | O(1) | Baseline |
 | Product Array | Optimized | O(n) | O(1) | ⭐ Best |
 | Product Array | Prefix+Suffix | O(n) | O(n) | Extra clarity |
+| Partition Array | Binary Search | O(n log S) | O(1) | ⭐ Optimal |
+| Partition Array | Dynamic Programming | O(n²k) | O(nk) | All boundaries |
+| Partition Array | Greedy | O(n log S) | O(k) | Visualizes result |
 
 ---
 
@@ -175,8 +224,11 @@ print(has_pair_one_pass(nums, k))  # True
 - **Hash Tables:** One-pass algorithms, complement lookups
 - **Two Pointers:** Sorted array manipulation
 - **Prefix/Suffix Arrays:** Space-efficient computation
+- **Binary Search:** Answer space search, optimization problems
+- **Dynamic Programming:** Multi-dimensional DP, boundary optimization
+- **Greedy Algorithms:** Partition filling, early termination
 - **Logging:** Debugging and algorithm visualization
-- **Edge Cases:** Empty inputs, duplicates, zeros
+- **Edge Cases:** Empty inputs, duplicates, zeros, k constraints
 
 ---
 
@@ -185,7 +237,8 @@ print(has_pair_one_pass(nums, k))  # True
 1. Start with **Problem01** - Understanding hash-based optimizations
 2. Move to **Binary_tree_traversal** - Graph/tree concepts
 3. Then **Brinary_tree** - Optimization techniques
-4. Finally **Problem02** - Advanced array manipulation
+4. Continue with **Problem02** - Advanced array manipulation
+5. Finish with **array_of_number** - Binary search and optimization
 
 ---
 
@@ -220,5 +273,5 @@ Educational purposes - Solutions and explanations for learning
 
 ---
 
-**Last Updated:** April 2026  
+**Last Updated:** April 10, 2026  
 **Status:** Active development
