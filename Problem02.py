@@ -35,7 +35,7 @@ def product_with_division(nums):
                 result.append(total_product)
             else:
                 result.append(0)
-        else:
+        else:git
             result.append(total_product // num)
 
     return result
