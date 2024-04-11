@@ -153,6 +153,66 @@ A collection of daily coding problem solutions in Python, covering various algor
 
 ---
 
+### 6. **Full Binary Tree Conversion** (`rebalance_tree.py`)
+**Problem:** Convert a binary tree to a full binary tree by removing nodes with only one child.
+
+**Definition:** A full binary tree is one where each node is either a leaf or has two children.
+
+**Example:**
+```
+Original:           Converted:
+     0                  0
+   /   \              /   \
+  1     2            5     4
+ /       \                /  \
+3         4              6    7
+ \       / \
+  5     6   7
+```
+
+**Three Solutions Provided:**
+
+#### 1. Recursive Post-Order Traversal ⭐ (Optimal)
+- `prune_tree(root)`
+- **Time:** O(n)
+- **Space:** O(h) where h is height
+- Process children before parent (post-order)
+- Return child if node has only one child, return node if leaf or both children exist
+
+#### 2. Iterative Post-Order Traversal
+- `prune_tree_iterative(root)`
+- **Time:** O(n)
+- **Space:** O(h)
+- Uses two stacks for post-order traversal
+- Alternative to recursion for avoiding stack overflow
+
+#### 3. Recursive with Verbose Tracking
+- `prune_tree_verbose(root)`
+- **Time:** O(n)
+- **Space:** O(h)
+- Tracks removed node count
+- Enhanced logging for understanding pruning process
+
+**Key Insights:**
+- Post-order traversal essential (process children first)
+- Nodes are "removed" by returning child references
+- Leaf nodes are always preserved (0 children = full)
+- Parent-child references updated during traversal
+
+**Test Cases Include:**
+- Given example from problem
+- Single node tree
+- Already full binary tree
+- Chain tree (all single children)
+- Complex mixed structure
+
+**Utility Functions:**
+- `tree_to_list_bfs(root)` - Level-order representation
+- `print_tree(root)` - Pretty-print tree structure
+- `create_example_tree()` - Build problem example
+
+---
+
 ## 🚀 Usage
 
 ### Running Individual Solutions
@@ -172,6 +232,9 @@ python Problem02.py
 
 # Run partition array examples
 python array_of_number.py
+
+# Run full binary tree conversion tests
+python rebalance_tree.py
 ```
 
 ### Example Usage in Code
@@ -215,20 +278,24 @@ print(has_pair_one_pass(nums, k))  # True
 | Partition Array | Binary Search | O(n log S) | O(1) | ⭐ Optimal |
 | Partition Array | Dynamic Programming | O(n²k) | O(nk) | All boundaries |
 | Partition Array | Greedy | O(n log S) | O(k) | Visualizes result |
+| Full Binary Tree | Post-Order Recursive | O(n) | O(h) | ⭐ Optimal |
+| Full Binary Tree | Iterative | O(n) | O(h) | Stack-based alternative |
+| Full Binary Tree | Verbose | O(n) | O(h) | Enhanced logging |
 
 ---
 
 ## 🔍 Key Concepts Covered
 
-- **Binary Trees:** Serialization, balance checking, tree traversal
+- **Binary Trees:** Serialization, balance checking, tree traversal, tree pruning, tree conversion
 - **Hash Tables:** One-pass algorithms, complement lookups
 - **Two Pointers:** Sorted array manipulation
 - **Prefix/Suffix Arrays:** Space-efficient computation
 - **Binary Search:** Answer space search, optimization problems
 - **Dynamic Programming:** Multi-dimensional DP, boundary optimization
 - **Greedy Algorithms:** Partition filling, early termination
+- **Tree Traversal:** Pre-order, in-order, post-order, level-order (BFS)
 - **Logging:** Debugging and algorithm visualization
-- **Edge Cases:** Empty inputs, duplicates, zeros, k constraints
+- **Edge Cases:** Empty inputs, duplicates, zeros, k constraints, single nodes
 
 ---
 
@@ -238,7 +305,8 @@ print(has_pair_one_pass(nums, k))  # True
 2. Move to **Binary_tree_traversal** - Graph/tree concepts
 3. Then **Brinary_tree** - Optimization techniques
 4. Continue with **Problem02** - Advanced array manipulation
-5. Finish with **array_of_number** - Binary search and optimization
+5. Study **array_of_number** - Binary search and optimization
+6. Finish with **rebalance_tree** - Tree transformation and pruning
 
 ---
 
@@ -274,4 +342,5 @@ Educational purposes - Solutions and explanations for learning
 ---
 
 **Last Updated:** April 10, 2026  
-**Status:** Active development
+**Status:** Active development  
+**Total Problems:** 6
