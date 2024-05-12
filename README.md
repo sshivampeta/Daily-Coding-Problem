@@ -213,6 +213,69 @@ Original:           Converted:
 
 ---
 
+### 7. **Find Cousins in Binary Tree** (`binary_tree_find_cousins.py`)
+**Problem:** Find all cousins of a given node in a binary tree.
+
+**Definition:** Two nodes are cousins if they are on the same level of the tree but have different parents.
+
+**Example:**
+```
+    1          In this tree, 4 and 6 are cousins
+   / \         (same level, different parents)
+  2   3        5 and 6 are also cousins
+ / \   \
+4   5   6
+```
+
+**Four Solutions Provided:**
+
+#### 1. BFS Level-Order Traversal ⭐ (Optimal)
+- `find_cousins_bfs(root, target)`
+- **Time:** O(n)
+- **Space:** O(w) - where w is maximum width of tree
+- Track parent of each node during BFS
+- Find target's level and parent, return nodes at same level with different parent
+
+#### 2. DFS with Parent Tracking
+- `find_cousins_dfs(root, target)`
+- **Time:** O(n)
+- **Space:** O(h) - recursive call stack
+- Two passes: find target depth/parent, then collect cousins
+- Clean separation of concerns
+
+#### 3. Single Pass DFS (Optimized)
+- `find_cousins_single_pass(root, target)`
+- **Time:** O(n)
+- **Space:** O(h)
+- Single DFS traversal with depth tracking
+- Maps depth to list of (node, parent) tuples
+
+#### 4. BFS with Early Termination
+- `find_cousins_bfs_optimized(root, target)`
+- **Time:** O(n) worst case
+- **Space:** O(w)
+- Attempt to optimize by stopping after target level
+
+**Key Insights:**
+- Cousins must be on same level (depth/height)
+- Different parent is the defining characteristic
+- Level-order traversal naturally groups nodes by level
+- Parent tracking is crucial for differentiation
+- Handle edge cases: root node, non-existent node, single node tree
+
+**Test Cases Include:**
+- Given example with multiple cousin pairs
+- Deep tree with asymmetric structure
+- Single node tree (no cousins)
+- Linear tree (right-only chain)
+- Node not found in tree
+
+**Utility Functions:**
+- `print_tree(root)` - Pretty-print tree structure
+- `create_example_tree()` - Build problem example
+
+---
+
 ## 🚀 Usage
 
 ### Running Individual Solutions
@@ -235,6 +298,9 @@ python array_of_number.py
 
 # Run full binary tree conversion tests
 python rebalance_tree.py
+
+# Run find cousins in tree tests
+python binary_tree_find_cousins.py
 ```
 
 ### Example Usage in Code
@@ -281,21 +347,26 @@ print(has_pair_one_pass(nums, k))  # True
 | Full Binary Tree | Post-Order Recursive | O(n) | O(h) | ⭐ Optimal |
 | Full Binary Tree | Iterative | O(n) | O(h) | Stack-based alternative |
 | Full Binary Tree | Verbose | O(n) | O(h) | Enhanced logging |
+| Find Cousins | BFS Level-Order | O(n) | O(w) | ⭐ Optimal approach |
+| Find Cousins | DFS Parent Tracking | O(n) | O(h) | Two-pass clean |
+| Find Cousins | Single Pass DFS | O(n) | O(h) | Depth-mapped |
+| Find Cousins | BFS Optimized | O(n) | O(w) | Early termination |
 
 ---
 
 ## 🔍 Key Concepts Covered
 
-- **Binary Trees:** Serialization, balance checking, tree traversal, tree pruning, tree conversion
+- **Binary Trees:** Serialization, balance checking, tree traversal, tree pruning, tree conversion, cousin finding, level-based queries
 - **Hash Tables:** One-pass algorithms, complement lookups
 - **Two Pointers:** Sorted array manipulation
 - **Prefix/Suffix Arrays:** Space-efficient computation
 - **Binary Search:** Answer space search, optimization problems
 - **Dynamic Programming:** Multi-dimensional DP, boundary optimization
 - **Greedy Algorithms:** Partition filling, early termination
-- **Tree Traversal:** Pre-order, in-order, post-order, level-order (BFS)
+- **Tree Traversal:** Pre-order, in-order, post-order, level-order (BFS), depth tracking
+- **Parent Tracking:** Finding relationships in tree structures
 - **Logging:** Debugging and algorithm visualization
-- **Edge Cases:** Empty inputs, duplicates, zeros, k constraints, single nodes
+- **Edge Cases:** Empty inputs, duplicates, zeros, k constraints, single nodes, non-existent nodes
 
 ---
 
@@ -306,7 +377,8 @@ print(has_pair_one_pass(nums, k))  # True
 3. Then **Brinary_tree** - Optimization techniques
 4. Continue with **Problem02** - Advanced array manipulation
 5. Study **array_of_number** - Binary search and optimization
-6. Finish with **rebalance_tree** - Tree transformation and pruning
+6. Progress to **rebalance_tree** - Tree transformation and pruning
+7. Finish with **binary_tree_find_cousins** - Level-based tree queries
 
 ---
 
@@ -343,4 +415,4 @@ Educational purposes - Solutions and explanations for learning
 
 **Last Updated:** April 10, 2026  
 **Status:** Active development  
-**Total Problems:** 6
+**Total Problems:** 7
