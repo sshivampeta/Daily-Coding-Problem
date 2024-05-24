@@ -276,6 +276,69 @@ Original:           Converted:
 
 ---
 
+### 8. **Maximum XOR** (`find_max_xor.py`)
+**Problem:** Find the maximum XOR of any two elements in an array.
+
+**Example:** Array `[14, 70, 53, 83, 49, 91, 36, 80, 92, 51, 66, 70]`  
+Maximum XOR: 83 ^ 36 = 123
+
+**Four Solutions Provided:**
+
+#### 1. Bit Manipulation with Trie ⭐ (Optimal)
+- `max_xor_trie(nums)`
+- **Time:** O(n × 32) = O(n)
+- **Space:** O(n × 32) = O(n)
+- Build trie of binary representations (32-bit integers)
+- For each number, traverse trie greedily picking opposite bits
+- Opposite bits maximize XOR value
+
+#### 2. Bit Manipulation with Set (No Trie)
+- `max_xor_set(nums)`
+- **Time:** O(n × 32) = O(n)
+- **Space:** O(n)
+- Build answer bit by bit from MSB to LSB
+- For each bit, try to set it to 1 and check if achievable
+- Use set for O(1) prefix lookup
+
+#### 3. Brute Force
+- `max_xor_bruteforce(nums)`
+- **Time:** O(n²)
+- **Space:** O(1)
+- Try all pairs and compute XOR
+- Straightforward but slow for large arrays
+
+#### 4. Greedy Bit Building
+- `max_xor_greedy(nums)`
+- **Time:** O(n × 32) = O(n)
+- **Space:** O(n)
+- Similar to set approach but more explicit
+- Build result bit by bit with prefix masking
+
+**Key Insights:**
+- XOR is maximized when bits differ as much as possible
+- Working from MSB (most significant bit) ensures maximum value
+- For each bit position, try to set it; verify with prefixes
+- Trie approach elegantly matches opposite bits for each number
+- Set approach uses mathematical property: `a ^ b = c` ⟹ `a ^ c = b`
+
+**Important Property:**
+- If we want `a ^ b = result`, and we know `result ^ a = b`
+- So for each bit, we try `temp = current_result | (1 << i)`
+- Then check if `temp ^ prefix_a = prefix_b` for some prefixes
+
+**Test Cases Include:**
+- Given example with various numbers
+- Simple arrays (powers of 2, sequential numbers)
+- Edge cases (single element, two elements)
+- Arrays with zeros
+- Binary representation tracing
+
+**Utility Functions:**
+- `print_binary(num)` - 32-bit binary representation
+- `trace_xor_pair(nums, target_xor)` - Find which pair gives max XOR
+
+---
+
 ## 🚀 Usage
 
 ### Running Individual Solutions
@@ -301,6 +364,9 @@ python rebalance_tree.py
 
 # Run find cousins in tree tests
 python binary_tree_find_cousins.py
+
+# Run maximum XOR tests
+python find_max_xor.py
 ```
 
 ### Example Usage in Code
@@ -351,6 +417,10 @@ print(has_pair_one_pass(nums, k))  # True
 | Find Cousins | DFS Parent Tracking | O(n) | O(h) | Two-pass clean |
 | Find Cousins | Single Pass DFS | O(n) | O(h) | Depth-mapped |
 | Find Cousins | BFS Optimized | O(n) | O(w) | Early termination |
+| Max XOR | Trie Approach | O(n) | O(n) | ⭐ Optimal |
+| Max XOR | Set Approach | O(n) | O(n) | Bit-by-bit building |
+| Max XOR | Brute Force | O(n²) | O(1) | All pairs |
+| Max XOR | Greedy Bits | O(n) | O(n) | Explicit approach |
 
 ---
 
@@ -365,6 +435,8 @@ print(has_pair_one_pass(nums, k))  # True
 - **Greedy Algorithms:** Partition filling, early termination
 - **Tree Traversal:** Pre-order, in-order, post-order, level-order (BFS), depth tracking
 - **Parent Tracking:** Finding relationships in tree structures
+- **Bit Manipulation:** Trie structures, bit-by-bit construction, XOR optimization
+- **Trie Data Structure:** Binary trie, prefix matching, bit representation
 - **Logging:** Debugging and algorithm visualization
 - **Edge Cases:** Empty inputs, duplicates, zeros, k constraints, single nodes, non-existent nodes
 
@@ -378,7 +450,8 @@ print(has_pair_one_pass(nums, k))  # True
 4. Continue with **Problem02** - Advanced array manipulation
 5. Study **array_of_number** - Binary search and optimization
 6. Progress to **rebalance_tree** - Tree transformation and pruning
-7. Finish with **binary_tree_find_cousins** - Level-based tree queries
+7. Next **binary_tree_find_cousins** - Level-based tree queries
+8. Finish with **find_max_xor** - Bit manipulation and Trie structures
 
 ---
 
@@ -415,4 +488,4 @@ Educational purposes - Solutions and explanations for learning
 
 **Last Updated:** April 10, 2026  
 **Status:** Active development  
-**Total Problems:** 7
+**Total Problems:** 8
