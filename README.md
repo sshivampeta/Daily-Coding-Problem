@@ -273,7 +273,6 @@ Original:           Converted:
 **Utility Functions:**
 - `print_tree(root)` - Pretty-print tree structure
 - `create_example_tree()` - Build problem example
-
 ---
 
 ### 8. **Maximum XOR** (`find_max_xor.py`)
@@ -339,6 +338,89 @@ Maximum XOR: 83 ^ 36 = 123
 
 ---
 
+### 9. **Connect 4 Game** (`connect_4.py`)
+**Problem:** Design and implement the Connect 4 game.
+
+**Game Rules:**
+- 7 columns × 6 rows grid
+- Two players alternate turns (RED vs BLACK)
+- Drop discs into columns; they fall to lowest available row
+- Win by creating 4 consecutive discs (horizontal, vertical, or diagonal)
+- Draw if board fills without winner
+
+**Classes Provided:**
+
+#### 1. ConnectFour ⭐ (Core Game Logic)
+- `__init__()` - Initialize 7×6 board
+- `drop_disc(col)` - Drop disc in column
+- `check_winner(row, col)` - Check 4 directions for winner
+- `display_board()` - Pretty-print board with emojis
+- `get_valid_moves()` - Return available columns
+- `get_game_status()` - Return current game state
+- `reset()` - Reset game to initial state
+
+**Winner Detection:**
+- Checks 4 directions from placed disc: horizontal, vertical, diagonal (\), diagonal (/)
+- Counts consecutive discs in both directions from placement
+- Time: O(1) - only checks from last move
+- Space: O(1)
+
+#### 2. ConnectFourAI (Intelligent Opponent)
+- `get_best_move(game)` - Get AI's best move
+- `_minimax(game, depth, alpha, beta, is_max)` - Minimax with alpha-beta pruning
+- `evaluate_position(board)` - Evaluate board position
+- Difficulty levels via search depth: 
+  - Easy: depth 1-2
+  - Medium: depth 3-4
+  - Hard: depth 5+ (slow)
+
+**AI Algorithm:**
+- **Minimax with Alpha-Beta Pruning**
+  - Time: O(7^depth) worst case, pruned significantly
+  - Space: O(depth) for recursion stack
+- **Evaluation Function:**
+  - Winning positions: +10000 (AI) / -10000 (human)
+  - 3 in a row: +100 / -100
+  - 2 in a row: +10 / -10
+  - Center column control: +3 per disc
+
+**Key Features:**
+- Board representation: 2D list with Player enum
+- Move tracking: Next available row per column
+- Efficient winner detection: O(1) from last move
+- Move validation: Check bounds and column fullness
+- Game state management: Current player, game status, move count
+- Colorized display: Emojis (🔴🔵) for visual appeal
+
+**Test Cases Include:**
+- Basic gameplay with multiple moves
+- Horizontal win detection
+- Vertical win detection
+- Diagonal win detection
+- Draw condition (full board)
+- Invalid move handling
+- AI player demo
+
+**Usage Example:**
+```python
+from connect_4 import ConnectFour, ConnectFourAI
+
+# Human vs AI
+game = ConnectFour()
+ai = ConnectFourAI(depth=4)  # Medium difficulty
+
+# Human plays column 3
+game.drop_disc(3)
+game.display_board()
+
+# AI's turn
+ai_col = ai.get_best_move(game)
+game.drop_disc(ai_col)
+game.display_board()
+```
+
+---
+
 ## 🚀 Usage
 
 ### Running Individual Solutions
@@ -367,6 +449,9 @@ python binary_tree_find_cousins.py
 
 # Run maximum XOR tests
 python find_max_xor.py
+
+# Run Connect 4 game tests
+python connect_4.py
 ```
 
 ### Example Usage in Code
@@ -421,6 +506,8 @@ print(has_pair_one_pass(nums, k))  # True
 | Max XOR | Set Approach | O(n) | O(n) | Bit-by-bit building |
 | Max XOR | Brute Force | O(n²) | O(1) | All pairs |
 | Max XOR | Greedy Bits | O(n) | O(n) | Explicit approach |
+| Connect 4 | Game Logic | O(1) | O(1) | Drop disc, check winner |
+| Connect 4 | AI Minimax | O(7^d) | O(d) | d = search depth, pruned |
 
 ---
 
@@ -437,6 +524,9 @@ print(has_pair_one_pass(nums, k))  # True
 - **Parent Tracking:** Finding relationships in tree structures
 - **Bit Manipulation:** Trie structures, bit-by-bit construction, XOR optimization
 - **Trie Data Structure:** Binary trie, prefix matching, bit representation
+- **Game Development:** Game state management, player turns, win detection
+- **Minimax Algorithm:** Game tree search, alpha-beta pruning for AI
+- **Board Games:** Connect 4 rules, disc placement, pattern detection
 - **Logging:** Debugging and algorithm visualization
 - **Edge Cases:** Empty inputs, duplicates, zeros, k constraints, single nodes, non-existent nodes
 
@@ -451,7 +541,8 @@ print(has_pair_one_pass(nums, k))  # True
 5. Study **array_of_number** - Binary search and optimization
 6. Progress to **rebalance_tree** - Tree transformation and pruning
 7. Next **binary_tree_find_cousins** - Level-based tree queries
-8. Finish with **find_max_xor** - Bit manipulation and Trie structures
+8. Then **find_max_xor** - Bit manipulation and Trie structures
+9. Finish with **connect_4** - Game development and AI with Minimax
 
 ---
 
@@ -488,4 +579,4 @@ Educational purposes - Solutions and explanations for learning
 
 **Last Updated:** April 10, 2026  
 **Status:** Active development  
-**Total Problems:** 8
+**Total Problems:** 9
